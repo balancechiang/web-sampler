@@ -41,9 +41,9 @@ body.transfer-open #samplerControls #panel {width:100%;visibility:hidden;pointer
 #transferPeer[open] #peerScanReply[hidden]{display:none}#transferPeer[open] #peerCancel{background:#333}#transferPeer[open] #peerStatus{min-height:2.4em}
 @media(max-height:420px){#transferPeer[open]{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,44vw);grid-template-rows:auto 1fr auto auto;text-align:left;gap:5px;}#transferPeer h2,#transferPeer p,#transferPeer button{grid-column:1}#peerQR{grid-column:2;grid-row:1/5;width:min(40vw,280px);height:min(40vw,280px);}}
 
-/* Use a body-level overlay instead of fullscreen dialogs in embedded WebViews. */
-#transferQR.qr-camera-overlay {position:fixed;inset:0;z-index:2147483000;box-sizing:border-box;width:auto;height:auto;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;overflow:hidden;background:#000;color:#fff;isolation:isolate;font:14px/1.35 Arial,sans-serif;}
-#transferQR.qr-camera-overlay[hidden] {display:none;}
+/* Modal scanner lives in the browser top layer so transformed app panels cannot clip it. */
+#transferQR[open] {position:fixed;inset:0;z-index:2147483000;box-sizing:border-box;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#000;color:#fff;isolation:isolate;font:14px/1.35 Arial,sans-serif;}
+#transferQR::backdrop {background:#000;}
 #transferQR video {position:absolute;inset:0;width:100%;height:100%;max-height:none;min-height:0;object-fit:cover;background:#000;transform:none;}
 #transferQR header {position:absolute;top:0;left:0;right:0;z-index:1;box-sizing:border-box;padding:calc(12px + env(safe-area-inset-top)) 14px 24px;background:linear-gradient(#000e,transparent);pointer-events:none;}
 #transferQR header p {margin:0;}

@@ -1,19 +1,19 @@
 /* Local QR scanner, camera lifecycle and URL fallback. */
 (function(root){'use strict';
   function create(parent){
-    // A regular body-level overlay is more reliable than <dialog> fullscreen in
-    // embedded Creation WebViews, which can report a viewport smaller than the screen.
-    const dialog=document.createElement('section');dialog.id='transferQR';dialog.className='qr-camera-overlay';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Scan project QR');dialog.hidden=true;
+    // A modal dialog enters the browser top layer, avoiding clipping by the
+    // transformed instrument/transfer sheet in embedded Creation WebViews.
+    const dialog=document.createElement('dialog');dialog.id='transferQR';dialog.setAttribute('aria-label','Scan project QR');
     dialog.innerHTML='<header><p>Scan QR / 扫描二维码</p><p id="transferQRStatus" role="status">Opening camera / 正在打开摄像头…</p></header><video id="transferQRVideo" autoplay muted playsinline></video><form id="transferQRForm"><button id="transferQRURLToggle" type="button" aria-expanded="false">Enter URL / 输入网址</button><label id="transferQRURLLabel" hidden>WAV URL / 下载网址<input id="transferQRURL" type="url" inputmode="url" autocomplete="off" placeholder="https://…/backup.wav"></label><button id="transferQRImport" type="submit" hidden>Import URL / 导入网址</button><button id="transferQRCancel" type="button">Cancel / 取消</button></form>';
     document.body.append(dialog);
     const video=dialog.querySelector('video'),status=dialog.querySelector('#transferQRStatus'),input=dialog.querySelector('input');
     let stream=null,worker=null,timer=null,finish=null,session=0,busy=false,receiver=null,assembler=null,pairing=false;
-    function cleanup(){clearTimeout(timer);timer=null;if(worker)worker.terminate();worker=null;if(stream)stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;video.srcObject=null;busy=false;}
-    function settle(text){root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:false}}));session++;cleanup();dialog.hidden=true;document.body.classList.remove('scanner-open');const resolve=finish;finish=null;resolve?.(text);}
+    function cleanup(){clearTimeout(timer);timer=null;if(worker)worker.terminate();worker=null;if(stream)stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;video.srcObject=null;busy=false;if(document.fullscreenElement===dialog)document.exitFullscreen?.().catch?.(()=>{});}
+    function settle(text){root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:false}}));session++;cleanup();if(dialog.open)dialog.close();const resolve=finish;finish=null;resolve?.(text);}
     const urlToggle=dialog.querySelector('#transferQRURLToggle'),urlLabel=dialog.querySelector('#transferQRURLLabel'),urlImport=dialog.querySelector('#transferQRImport');
     urlToggle.onclick=()=>{const expanded=urlToggle.getAttribute('aria-expanded')!=='true';urlToggle.setAttribute('aria-expanded',String(expanded));urlLabel.hidden=!expanded;urlImport.hidden=!expanded;if(expanded)input.focus({preventScroll:true});};
     dialog.querySelector('#transferQRCancel').onclick=()=>settle(null);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&finish){e.preventDefault();settle(null);}});
+    dialog.addEventListener('cancel',e=>{e.preventDefault();settle(null);});
     dialog.querySelector('form').onsubmit=e=>{e.preventDefault();if(input.value.trim())settle(input.value.trim());};
     document.addEventListener('visibilitychange',()=>{if(document.hidden && finish)settle(null);});
     async function camera(token){
@@ -53,7 +53,7 @@
       }catch(error){if(token!==session)return;cleanup();status.textContent=`${error.name || 'Camera'}: ${error.message || 'Unavailable'}. Paste URL below / 可在下方输入网址。`;}
     }
     return {get active(){return !!finish;},close:()=>settle(null),
-      open(options={}){if(finish)settle(null);pairing=options.pairing===true;assembler=pairing?root.PO33PeerTransfer?.createSignalAssembler():null;root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:true}}));const token=++session;input.value='';urlToggle.setAttribute('aria-expanded','false');urlLabel.hidden=urlImport.hidden=true;status.textContent=pairing?'Scan the animated pairing QR / 请扫描动态配对二维码':'Opening camera / 正在打开摄像头…';dialog.hidden=false;document.body.classList.add('scanner-open');dialog.querySelector('#transferQRCancel').focus({preventScroll:true});const result=new Promise(resolve=>{finish=resolve;});camera(token);return result;}
+      open(options={}){if(finish)settle(null);pairing=options.pairing===true;assembler=pairing?root.PO33PeerTransfer?.createSignalAssembler():null;root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:true}}));const token=++session;input.value='';urlToggle.setAttribute('aria-expanded','false');urlLabel.hidden=urlImport.hidden=true;status.textContent=pairing?'Scan the animated pairing QR / 请扫描动态配对二维码':'Opening camera / 正在打开摄像头…';dialog.showModal();dialog.querySelector('#transferQRCancel').focus({preventScroll:true});try{const pending=dialog.requestFullscreen?.({navigationUI:'hide'});pending?.catch?.(()=>{});}catch{}const result=new Promise(resolve=>{finish=resolve;});camera(token);return result;}
     };
   }
   root.PO33QRCamera={create};

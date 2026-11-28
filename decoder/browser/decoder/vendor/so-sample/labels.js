@@ -9,7 +9,7 @@
  * two-bit wire values, two cells per byte, right channel before left. The device sends a
  * fixed 4095-byte preamble, then the packet frame (see packets.ts).
  */
-import { concatBytes } from "./bytes.js?v=web-sampler-0.2.35";
+import { concatBytes } from "./bytes.js?v=web-sampler-0.2.36";
 export const FRAME_START_BYTE = 4095;
 /** Circular order under (H, L) -> (not L, H): 10 -> 11 -> 01 -> 00. */
 const CIRCULAR_INDEX = [3, 2, 0, 1];

@@ -46,12 +46,10 @@
   place('tapeRight',gs,compact?139.5:168,compact?15.5:cy+6,139.5,13.5);
   window.dispatchEvent(new Event('po33-layout-change'));
  }
- function lockPortrait(){if(Math.min(window.screen.width,window.screen.height)>=600 || matchMedia('(pointer:fine)').matches)return;try{const pending=window.screen.orientation?.lock?.('portrait');pending?.catch(()=>{});}catch{}}
- document.addEventListener('pointerdown',lockPortrait,{once:true});
  let layoutFrame=0,settleTimers=[];
  function scheduleLayout(){if(!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;layout();});}
  function settleLayout(){scheduleLayout();settleTimers.forEach(clearTimeout);settleTimers=[100,350,800].map(ms=>setTimeout(scheduleLayout,ms));}
- window.addEventListener('orientationchange',()=>{lockPortrait();settleLayout();});
+ window.addEventListener('orientationchange',settleLayout);
  window.addEventListener('resize',scheduleLayout);
  if(window.visualViewport){window.visualViewport.addEventListener('resize',scheduleLayout);window.visualViewport.addEventListener('scroll',scheduleLayout);}
  if(window.ResizeObserver)new ResizeObserver(scheduleLayout).observe(document.body);

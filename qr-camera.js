@@ -8,8 +8,6 @@
     document.body.append(dialog);
     const video=dialog.querySelector('video'),status=dialog.querySelector('#transferQRStatus'),input=dialog.querySelector('input');
     let stream=null,worker=null,timer=null,finish=null,session=0,busy=false,receiver=null,assembler=null,pairing=false;
-    function syncViewport(){const width=Math.max(1,Math.round(document.documentElement.clientWidth||root.innerWidth));const height=Math.max(1,Math.round(Math.max(root.innerHeight||0,document.documentElement.clientHeight||0)));dialog.style.setProperty('--scan-width',width+'px');dialog.style.setProperty('--scan-height',height+'px');dialog.style.setProperty('--scan-top','0px');}
-    root.addEventListener('resize',syncViewport);root.visualViewport?.addEventListener('resize',syncViewport);root.visualViewport?.addEventListener('scroll',syncViewport);
     function cleanup(){clearTimeout(timer);timer=null;if(worker)worker.terminate();worker=null;if(stream)stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;video.srcObject=null;busy=false;}
     function settle(text){root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:false}}));session++;cleanup();dialog.hidden=true;document.body.classList.remove('scanner-open');const resolve=finish;finish=null;resolve?.(text);}
     const urlToggle=dialog.querySelector('#transferQRURLToggle'),urlLabel=dialog.querySelector('#transferQRURLLabel'),urlImport=dialog.querySelector('#transferQRImport');
@@ -55,7 +53,7 @@
       }catch(error){if(token!==session)return;cleanup();status.textContent=`${error.name || 'Camera'}: ${error.message || 'Unavailable'}. Paste URL below / 可在下方输入网址。`;}
     }
     return {get active(){return !!finish;},close:()=>settle(null),
-      open(options={}){if(finish)settle(null);pairing=options.pairing===true;assembler=pairing?root.PO33PeerTransfer?.createSignalAssembler():null;root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:true}}));const token=++session;input.value='';urlToggle.setAttribute('aria-expanded','false');urlLabel.hidden=urlImport.hidden=true;status.textContent=pairing?'Scan the animated pairing QR / 请扫描动态配对二维码':'Opening camera / 正在打开摄像头…';syncViewport();dialog.hidden=false;document.body.classList.add('scanner-open');dialog.querySelector('#transferQRCancel').focus({preventScroll:true});const result=new Promise(resolve=>{finish=resolve;});camera(token);return result;}
+      open(options={}){if(finish)settle(null);pairing=options.pairing===true;assembler=pairing?root.PO33PeerTransfer?.createSignalAssembler():null;root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:true}}));const token=++session;input.value='';urlToggle.setAttribute('aria-expanded','false');urlLabel.hidden=urlImport.hidden=true;status.textContent=pairing?'Scan the animated pairing QR / 请扫描动态配对二维码':'Opening camera / 正在打开摄像头…';dialog.hidden=false;document.body.classList.add('scanner-open');dialog.querySelector('#transferQRCancel').focus({preventScroll:true});const result=new Promise(resolve=>{finish=resolve;});camera(token);return result;}
     };
   }
   root.PO33QRCamera={create};

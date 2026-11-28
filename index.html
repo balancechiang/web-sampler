@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#0a0a0a">
 <title>Web Sampler</title>
 <meta name="description" content="Independent web sampler, inspired by the PO-33 workflow. Supports compatible audio-protocol backup transfer. Not affiliated with Teenage Engineering.">
-<link rel="manifest" href="./manifest.webmanifest?v=web-sampler-0.2.34">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=web-sampler-0.2.34">
-<link rel="icon" type="image/png" sizes="192x192" href="./pwa-icon-192.png?v=web-sampler-0.2.34">
-<link rel="shortcut icon" href="./apple-touch-icon.png?v=web-sampler-0.2.34">
+<link rel="manifest" href="./manifest.webmanifest?v=web-sampler-0.2.35">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=web-sampler-0.2.35">
+<link rel="icon" type="image/png" sizes="192x192" href="./pwa-icon-192.png?v=web-sampler-0.2.35">
+<link rel="shortcut icon" href="./apple-touch-icon.png?v=web-sampler-0.2.35">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Web Sampler">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="./style.css?v=web-sampler-0.2.34">
-<link rel="stylesheet" href="./panel.css?v=web-sampler-0.2.34">
-<link rel="stylesheet" href="./workbench.css?v=web-sampler-0.2.34">
-<link rel="stylesheet" href="./transfer-panel.css?v=web-sampler-0.2.34">
-<script id="runtime-version">window.PO33_BUILD="web-sampler-0.2.34"+(new URLSearchParams(location.search).has('refresh')?'-'+Date.now():'');window.PO33_RESOURCE=p=>{const u=new URL(p,document.baseURI);u.searchParams.set('v',window.PO33_BUILD);return u.href;};if(new URLSearchParams(location.search).has('boot')||new URLSearchParams(location.search).has('refresh'))history.replaceState(null,'','./index.html');</script>
+<link rel="stylesheet" href="./style.css?v=web-sampler-0.2.35">
+<link rel="stylesheet" href="./panel.css?v=web-sampler-0.2.35">
+<link rel="stylesheet" href="./workbench.css?v=web-sampler-0.2.35">
+<link rel="stylesheet" href="./transfer-panel.css?v=web-sampler-0.2.35">
+<script id="runtime-version">window.PO33_BUILD="web-sampler-0.2.35"+(new URLSearchParams(location.search).has('refresh')?'-'+Date.now():'');window.PO33_RESOURCE=p=>{const u=new URL(p,document.baseURI);u.searchParams.set('v',window.PO33_BUILD);return u.href;};if(new URLSearchParams(location.search).has('boot')||new URLSearchParams(location.search).has('refresh'))history.replaceState(null,'','./index.html');</script>
 </head>
 <body data-mode="PLAY">
 
@@ -44,7 +44,7 @@
       </style>
 
       <!-- Center: Small Isometric White Rabbit Head -->
-      <g id="rabbit-head"><image href="./assets/mascot-head.svg?v=web-sampler-0.2.34" x="88" y="10" width="58" height="82"/></g>
+      <g id="rabbit-head"><image href="./assets/mascot-head.svg?v=web-sampler-0.2.35" x="88" y="10" width="58" height="82"/></g>
 
       <!-- Left Oversized Cute Rounded Orange Boxing Glove -->
       <g id="glove-left">
@@ -78,16 +78,16 @@
   </div>
 
   <div id="panel" aria-label="Web Sampler controls">
-    <img id="panelArt" src="./assets/panel-art.svg?v=web-sampler-0.2.34" alt="" draggable="false">
+    <img id="panelArt" src="./assets/panel-art.svg?v=web-sampler-0.2.35" alt="" draggable="false">
     <svg id="lcd" viewBox="0 0 240 282" aria-label="Sampler status">
       <text id="lcdMode" x="1" y="14.4" fill="#fff" font-family="Arial,sans-serif" font-size="8">DISCO</text>
       <g id="lcdRecord" transform="translate(-20 0)"><rect x="177" y="5" width="13" height="13" fill="#fff"/><circle cx="183.5" cy="11.5" r="5" fill="#000"/></g>
       <path transform="translate(-23 0)" id="lcdPlay" d="M197 5L207 11.5L197 18Z" fill="#fff"/>
       <text id="lcdNumber" x="190" y="17.8" text-anchor="start" font-family="DSEG7,monospace" font-size="13" fill="#fff">120</text>
       <g id="transportMascot">
-        <g id="tapeHead"><image href="./assets/mascot-head.svg?v=web-sampler-0.2.34" x="109" y="0" width="23" height="22"/></g>
-        <g id="tapeLeft"><image href="./assets/mascot-left.svg?v=web-sampler-0.2.34" x="93" y="5" width="15" height="17"/></g>
-        <g id="tapeRight"><image href="./assets/mascot-right.svg?v=web-sampler-0.2.34" x="132" y="5" width="15" height="17"/></g>
+        <g id="tapeHead"><image href="./assets/mascot-head.svg?v=web-sampler-0.2.35" x="109" y="0" width="23" height="22"/></g>
+        <g id="tapeLeft"><image href="./assets/mascot-left.svg?v=web-sampler-0.2.35" x="93" y="5" width="15" height="17"/></g>
+        <g id="tapeRight"><image href="./assets/mascot-right.svg?v=web-sampler-0.2.35" x="132" y="5" width="15" height="17"/></g>
       </g>
       <g id="lcdIn"><rect x="0" y="23" width="16" height="7" rx="3" fill="#222"/><text x="8" y="28.4" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" fill="#888">IN</text></g>
       <g id="lcdOut"><rect x="224" y="23" width="16" height="7" rx="3" fill="#222"/><text x="232" y="28.4" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" fill="#888">OUT</text></g>
@@ -102,8 +102,8 @@
       <button class="cbtn" type="button" data-act="sound" aria-label="Sound" style="--x:32.2;--y:52.8">sound</button>
       <button class="cbtn" type="button" data-act="pattern" aria-label="Pattern" style="--x:76;--y:52.8">pattern</button>
       <button id="bpmMode" type="button" aria-label="BPM: tap presets; hold and turn A for swing or B for tempo" style="--x:119.8;--y:52.8">bpm</button>
-      <button id="knobA" class="knob" type="button" aria-label="Knob A: pitch, filter or trim start; hold BPM for swing" style="--x:163.6;--y:52.8"><span class="knob-rotor" aria-hidden="true"><img src="./assets/knob-a.svg?v=web-sampler-0.2.34" alt="" draggable="false"></span></button>
-      <button id="knobB" class="knob" type="button" aria-label="Knob B: volume, resonance or trim length; hold BPM for tempo" style="--x:207.4;--y:52.8"><span class="knob-rotor" aria-hidden="true"><img src="./assets/knob-b.svg?v=web-sampler-0.2.34" alt="" draggable="false"></span></button>
+      <button id="knobA" class="knob" type="button" aria-label="Knob A: pitch, filter or trim start; hold BPM for swing" style="--x:163.6;--y:52.8"><span class="knob-rotor" aria-hidden="true"><img src="./assets/knob-a.svg?v=web-sampler-0.2.35" alt="" draggable="false"></span></button>
+      <button id="knobB" class="knob" type="button" aria-label="Knob B: volume, resonance or trim length; hold BPM for tempo" style="--x:207.4;--y:52.8"><span class="knob-rotor" aria-hidden="true"><img src="./assets/knob-b.svg?v=web-sampler-0.2.35" alt="" draggable="false"></span></button>
       <button class="cbtn" type="button" data-act="rec" aria-label="Record: hold and press a pad to sample" style="--x:207.4;--y:102.6">record</button>
       <button class="cbtn" type="button" data-act="fx" aria-label="Effects" style="--x:207.4;--y:152.4">FX</button>
       <button class="cbtn" type="button" data-act="play" aria-label="Play or stop" style="--x:207.4;--y:202.2">play<span class="led" aria-hidden="true"></span></button>
@@ -112,27 +112,27 @@
     </div>
   </div>
 
-  <script src="./startup-guard.js?v=web-sampler-0.2.34"></script>
-  <script src="./runtime-lifecycle.js?v=web-sampler-0.2.34"></script>
-  <script src="./sample-assets.js?v=web-sampler-0.2.34"></script>
-  <script src="./presets.js?v=web-sampler-0.2.34"></script>
-  <script src="./effects.js?v=web-sampler-0.2.34"></script>
-  <script src="./lcd-indicator.js?v=web-sampler-0.2.34"></script>
-  <script src="./project-preview-adapter.js?v=web-sampler-0.2.34"></script>
-  <script src="./transfer-storage.js?v=web-sampler-0.2.34"></script>
-  <script src="./qr-camera.js?v=web-sampler-0.2.34"></script>
-  <script src="./vendor/qrcodejs/qrcode.min.js?v=web-sampler-0.2.34"></script>
-  <script src="./peer-transfer.js?v=web-sampler-0.2.34"></script>
-  <script src="./local-hub-client.js?v=web-sampler-0.2.34"></script>
-  <script src="./backup-audio.js?v=web-sampler-0.2.34"></script>
-  <script src="./transfer-panel.js?v=web-sampler-0.2.34"></script>
-  <script src="./filter-calibration.js?v=web-sampler-0.2.34"></script>
-  <script src="./sampling.js?v=web-sampler-0.2.34"></script>
-  <script src="./voice.js?v=web-sampler-0.2.34"></script>
-  <script src="./workbench.js?v=web-sampler-0.2.34"></script>
-  <script src="./responsive-layout.js?v=web-sampler-0.2.34"></script>
-  <script src="./mascot-motion.js?v=web-sampler-0.2.34"></script>
-  <script src="./sync.js?v=web-sampler-0.2.34"></script>
-  <script src="./app.js?v=web-sampler-0.2.34"></script>
+  <script src="./startup-guard.js?v=web-sampler-0.2.35"></script>
+  <script src="./runtime-lifecycle.js?v=web-sampler-0.2.35"></script>
+  <script src="./sample-assets.js?v=web-sampler-0.2.35"></script>
+  <script src="./presets.js?v=web-sampler-0.2.35"></script>
+  <script src="./effects.js?v=web-sampler-0.2.35"></script>
+  <script src="./lcd-indicator.js?v=web-sampler-0.2.35"></script>
+  <script src="./project-preview-adapter.js?v=web-sampler-0.2.35"></script>
+  <script src="./transfer-storage.js?v=web-sampler-0.2.35"></script>
+  <script src="./qr-camera.js?v=web-sampler-0.2.35"></script>
+  <script src="./vendor/qrcodejs/qrcode.min.js?v=web-sampler-0.2.35"></script>
+  <script src="./peer-transfer.js?v=web-sampler-0.2.35"></script>
+  <script src="./local-hub-client.js?v=web-sampler-0.2.35"></script>
+  <script src="./backup-audio.js?v=web-sampler-0.2.35"></script>
+  <script src="./transfer-panel.js?v=web-sampler-0.2.35"></script>
+  <script src="./filter-calibration.js?v=web-sampler-0.2.35"></script>
+  <script src="./sampling.js?v=web-sampler-0.2.35"></script>
+  <script src="./voice.js?v=web-sampler-0.2.35"></script>
+  <script src="./workbench.js?v=web-sampler-0.2.35"></script>
+  <script src="./responsive-layout.js?v=web-sampler-0.2.35"></script>
+  <script src="./mascot-motion.js?v=web-sampler-0.2.35"></script>
+  <script src="./sync.js?v=web-sampler-0.2.35"></script>
+  <script src="./app.js?v=web-sampler-0.2.35"></script>
 </body>
 </html>

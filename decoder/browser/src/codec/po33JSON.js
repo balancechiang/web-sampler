@@ -1,6 +1,6 @@
 /** Versioned lossless binary JSON. Float samples are bytes, never decimal text. */
-import { bytesToBase64, base64ToBytes } from "../../decoder/vendor/so-sample/bytes.js?v=web-sampler-0.2.33";
-import { decodePO33Frame } from "./po33Codec.js?v=web-sampler-0.2.33";
+import { bytesToBase64, base64ToBytes } from "../../decoder/vendor/so-sample/bytes.js?v=web-sampler-0.2.34";
+import { decodePO33Frame } from "./po33Codec.js?v=web-sampler-0.2.34";
 const littleEndian = new Uint8Array(new Uint32Array([1]).buffer)[0] === 1;
 function floatBytes(array) {
     const bytes = new Uint8Array(array.buffer, array.byteOffset, array.byteLength).slice();

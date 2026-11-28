@@ -11,8 +11,8 @@
  * (4105 bytes in 255-byte chunks), later pages separately. A 9-byte record whose owner
  * is another sound is a reference into that sound's buffer.
  */
-import { bytesEqual, readU32LE, writeU32LE } from "./bytes.js?v=web-sampler-0.2.33";
-import { TAG, packet } from "./packets.js?v=web-sampler-0.2.33";
+import { bytesEqual, readU32LE, writeU32LE } from "./bytes.js?v=web-sampler-0.2.34";
+import { TAG, packet } from "./packets.js?v=web-sampler-0.2.34";
 export const GLOBAL_RECORDS = 2;
 export const GLOBAL_BYTES = 255;
 export const PATTERN_COUNT = 16;

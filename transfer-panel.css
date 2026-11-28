@@ -48,13 +48,13 @@ body.transfer-open #samplerControls #panel {width:100%;visibility:hidden;pointer
 #transferQR header {position:absolute;top:0;left:0;right:0;z-index:1;box-sizing:border-box;padding:calc(12px + env(safe-area-inset-top)) 14px 24px;background:linear-gradient(#000e,transparent);pointer-events:none;}
 #transferQR header p {margin:0;}
 #transferQR #transferQRStatus {margin-top:5px;}
-#transferQR form {position:absolute;left:0;right:0;bottom:0;z-index:2;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:24px max(14px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:linear-gradient(transparent,#000e 22%);}
-#transferQR form button {min-height:44px;border:1px solid #aaa;border-radius:8px;background:#292929;color:#fff;font:inherit;touch-action:manipulation;}
+#transferQR form {position:absolute;left:0;right:0;bottom:0;z-index:2;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:transparent;}
+#transferQR form button {min-height:40px;border:1px solid #aaa;border-radius:8px;background:#171b1dcc;color:#fff;font:inherit;touch-action:manipulation;backdrop-filter:blur(5px);}
 #transferQR #transferQRURLToggle,#transferQR #transferQRURLLabel {grid-column:1/-1;}
 #transferQR #transferQRURLLabel {font-size:12px;}
 #transferQR #transferQRURLLabel[hidden],#transferQR #transferQRImport[hidden] {display:none;}
 #transferQR input[type=url] {box-sizing:border-box;width:100%;min-height:42px;margin-top:4px;padding:8px;background:#111;color:#fff;border:1px solid #aaa;border-radius:6px;font:16px Arial,sans-serif;user-select:text;}
-#transferQR #transferQRCancel {background:#111c;}
+#transferQR #transferQRCancel {background:#171b1dcc;}
 #transferPeer[open] {position:fixed;inset:0;z-index:2147483001;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:calc(6px + env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));border:0;border-radius:0;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;justify-items:center;align-items:center;gap:2px;overflow:hidden;background:#111;color:#fff;}
 #transferPeer::backdrop {background:#111;}
 #transferPeer #peerQR {grid-column:1/-1;grid-row:2;width:min(calc(var(--peer-vw,100vw) - 12px),calc(var(--peer-vh,100dvh) - 58px),640px);height:auto;aspect-ratio:1;max-height:none;padding:3px;align-self:center;}

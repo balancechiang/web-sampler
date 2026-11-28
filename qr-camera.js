@@ -8,7 +8,7 @@
     document.body.append(dialog);
     const video=dialog.querySelector('video'),status=dialog.querySelector('#transferQRStatus'),input=dialog.querySelector('input');
     let stream=null,worker=null,timer=null,finish=null,session=0,busy=false,receiver=null,assembler=null,pairing=false;
-    function syncViewport(){const viewport=root.visualViewport;const width=Math.max(1,Math.round(viewport?.width||document.documentElement.clientWidth||root.innerWidth));const height=Math.max(1,Math.round(viewport?.height||document.documentElement.clientHeight||root.innerHeight));dialog.style.setProperty('--scan-width',width+'px');dialog.style.setProperty('--scan-height',height+'px');dialog.style.setProperty('--scan-top',Math.max(0,Math.round(viewport?.offsetTop||0))+'px');}
+    function syncViewport(){const width=Math.max(1,Math.round(document.documentElement.clientWidth||root.innerWidth));const height=Math.max(1,Math.round(Math.max(root.innerHeight||0,document.documentElement.clientHeight||0)));dialog.style.setProperty('--scan-width',width+'px');dialog.style.setProperty('--scan-height',height+'px');dialog.style.setProperty('--scan-top','0px');}
     root.addEventListener('resize',syncViewport);root.visualViewport?.addEventListener('resize',syncViewport);root.visualViewport?.addEventListener('scroll',syncViewport);
     function cleanup(){clearTimeout(timer);timer=null;if(worker)worker.terminate();worker=null;if(stream)stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;video.srcObject=null;busy=false;}
     function settle(text){root.dispatchEvent(new CustomEvent('po33-scan-state',{detail:{active:false}}));session++;cleanup();dialog.hidden=true;document.body.classList.remove('scanner-open');const resolve=finish;finish=null;resolve?.(text);}

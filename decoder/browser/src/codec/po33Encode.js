@@ -1,8 +1,8 @@
 /** Stereo DQPSK synthesis ported from libpo po_stereo.c @ bd56423d (MIT).
  * See decoder/vendor/libpo/LICENSE and PROVENANCE.md. No audio APIs or resampling.
  */
-import { encodePackets, TAG } from "../../decoder/vendor/so-sample/packets.js?v=web-sampler-0.2.33";
-import { serializeState } from "../../decoder/vendor/so-sample/state.js?v=web-sampler-0.2.33";
+import { encodePackets, TAG } from "../../decoder/vendor/so-sample/packets.js?v=web-sampler-0.2.34";
+import { serializeState } from "../../decoder/vendor/so-sample/state.js?v=web-sampler-0.2.34";
 export function encodePO33Frame(state) {
     const body = encodePackets(serializeState(state)), wire = new Uint8Array(4096 + body.length);
     for (let i = 0; i < 4092; i++)

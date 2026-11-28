@@ -4,7 +4,7 @@
     const box=document.createElement('section');box.id='transferControls';box.setAttribute('aria-label','Hardware project transfer');
     box.innerHTML='<p id="transferHint" role="status" aria-live="polite"></p><div><button id="transferFile">Open WAV</button><input id="transferFileInput" type="file" accept=".wav,audio/wav"><button id="transferRecord">Line in</button><button id="transferSend" class="primary">Line out</button><button id="transferSave">Save WAV</button><button id="transferStop">Stop</button><button id="transferClose">Close</button><button id="transferUndo">Undo restore</button><button id="transferDeviceToggle">I/O</button></div><div id="transferDevices" hidden><button id="transferRefresh">Find devices</button><button id="transferCheckInput">Check input</button><button id="transferTone" type="button">PO-33 TONE ON</button><p id="transferInputReport" role="status"></p><label>Input <select id="transferInput"><option value="">System default</option></select></label><label>Output <select id="transferOutput"><option value="">System default</option></select></label></div>';
     (document.getElementById('samplerControls') || document.body).append(box);const $=id=>document.getElementById(id);
-    const scanButton=document.createElement('button');scanButton.id='transferScan';scanButton.textContent='Scan QR / 扫码';$('transferFile').after(scanButton);
+    const scanButton=document.createElement('button');scanButton.id='transferScan';scanButton.textContent='Scan QR / 扫码';let scanPointerArmed=false;scanButton.addEventListener('pointerdown',()=>{scanPointerArmed=true;},true);scanButton.addEventListener('pointercancel',()=>{scanPointerArmed=false;},true);$('transferFile').after(scanButton);
     const scanner=root.PO33QRCamera.create(box);
     const hubButton=document.createElement('button');hubButton.id='transferHub';hubButton.textContent='LAN HUB (:33033)';scanButton.after(hubButton);
     const jsonButton=document.createElement('button');jsonButton.id='transferJSON';jsonButton.textContent='Save JSON';$('transferSave').after(jsonButton);
@@ -225,7 +225,8 @@
       }catch(error){controller?.abort();if(token===generation)await fail(error.name==='TypeError'?Error(lan?'LAN download blocked or unreachable: check same Wi-Fi, local-network permission and HTTP/CORS policy / 局域网未连接或被浏览器限制':'Download failed: network or CORS. Use a public WAV direct link with cross-origin access / 网络或跨域限制，请使用允许跨域的 WAV 直链'):error.name==='AbortError'?Error('Download timed out / 下载超时'):error);}
       finally{clearTimeout(timeout);if(downloadAbort===controller)downloadAbort=null;}
     }
-    scanButton.onclick=async()=>{
+    scanButton.onclick=async(event)=>{
+      const intentional=scanPointerArmed || (event.detail===0 && document.activeElement===scanButton);scanPointerArmed=false;if(!intentional)return;
       const token=++generation;set('scanning','Scanning project QR / 扫描工程二维码',{progress:0,level:0});
       try{const text=await scanner.open();if(token!==generation)return;if(text)await readURL(text);else set('waiting','rcv · Scan cancelled / 已取消扫码',{progress:0});}
       catch(error){if(token===generation)await fail(error);}

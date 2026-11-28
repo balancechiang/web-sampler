@@ -47,6 +47,7 @@ body.transfer-open #samplerControls #panel {width:100%;visibility:hidden;pointer
 #transferQR video {position:absolute;inset:0;width:100%;height:100%;max-height:none;min-height:0;object-fit:cover;background:#000;transform:none;}
 #transferQR header {position:absolute;top:0;left:0;right:0;z-index:1;box-sizing:border-box;padding:calc(12px + env(safe-area-inset-top)) 14px 24px;background:linear-gradient(#000e,transparent);pointer-events:none;}
 #transferQR header p {margin:0;}
+#transferQR #transferQRViewport {display:block;margin-top:2px;font-size:10px;opacity:.75;}
 #transferQR #transferQRStatus {margin-top:5px;}
 #transferQR form {position:absolute;left:0;right:0;bottom:0;z-index:2;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:transparent;}
 #transferQR form button {min-height:40px;border:1px solid #aaa;border-radius:8px;background:#171b1dcc;color:#fff;font:inherit;touch-action:manipulation;backdrop-filter:blur(5px);}

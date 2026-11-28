@@ -11,7 +11,7 @@
     const shareButton=document.createElement('button');shareButton.id='transferShare';shareButton.textContent='Share QR · own R2';jsonButton.after(shareButton);
     const peerSendButton=document.createElement('button');peerSendButton.id='transferPeerSend';peerSendButton.textContent='Wi-Fi Send QR / 直连发送';shareButton.after(peerSendButton);
     const peerReceiveButton=document.createElement('button');peerReceiveButton.id='transferPeerReceive';peerReceiveButton.textContent='Wi-Fi Receive QR / 直连接收';hubButton.after(peerReceiveButton);
-    const peerDialog=document.createElement('dialog');peerDialog.id='transferPeer';peerDialog.innerHTML='<h2>Direct Wi-Fi transfer / 局域网直连传工程</h2><p id="peerInstructions">Scan this pairing QR on the receiving Web Sampler.</p><div id="peerQR" aria-label="WebRTC pairing QR"></div><p id="peerStatus" role="status" aria-live="polite"></p><button id="peerScanReply" type="button">Scan reply QR / 扫描回复码</button><button id="peerCancel" type="button">Cancel / 取消</button>';box.append(peerDialog);
+    const peerDialog=document.createElement('dialog');peerDialog.id='transferPeer';peerDialog.innerHTML='<h2>Direct Wi-Fi transfer / 局域网直连传工程</h2><p id="peerInstructions">Scan this pairing QR on the receiving Web Sampler.</p><div id="peerQR" aria-label="WebRTC pairing QR"></div><p id="peerStatus" role="status" aria-live="polite"></p><button id="peerScanReply" type="button">Scan reply QR / 扫描回复码</button><button id="peerCancel" type="button">Cancel / 取消</button>';document.body.append(peerDialog);
     const peerQr=$('peerQR'),peerStatus=$('peerStatus'),peerInstructions=$('peerInstructions');let peer=null,peerRole=null,peerQrFrames=[],peerQrFrame=0,peerQrTimer=null;
     function stopPeerQr(){clearInterval(peerQrTimer);peerQrTimer=null;}
     function showPeerFrame(index){if(!peerQrFrames.length)return;peerQrFrame=index%peerQrFrames.length;peerQr.replaceChildren();new root.QRCode(peerQr,{text:peerQrFrames[peerQrFrame],width:640,height:640,correctLevel:root.QRCode.CorrectLevel.M});peerQr.dataset.signalFrame=peerQrFrames[peerQrFrame];peerStatus.textContent=`QR ${peerQrFrame+1}/${peerQrFrames.length} · scan all frames / 扫描全部`;}
@@ -30,6 +30,7 @@
       try{peerQrFrames=root.PO33PeerTransfer.fragmentSignal(text,220);}
       catch(error){throw Error((error?.message||'Pairing code could not be split.')+' Keep both devices on the same Wi-Fi and retry.');}
       peerRole=role;peerQrFrame=0;peerDialog.querySelector('#peerScanReply').hidden=role!=='send';peerInstructions.textContent=role==='send'?'On the other device, scan every frame / 在另一设备扫描全部帧':'Sender: scan every reply frame / 发送端需扫描全部回复帧';
+      const viewport=root.visualViewport,width=Math.max(1,viewport?.width||document.documentElement.clientWidth||innerWidth),height=Math.max(1,viewport?.height||document.documentElement.clientHeight||innerHeight);peerDialog.style.setProperty('--peer-vw',width+'px');peerDialog.style.setProperty('--peer-vh',height+'px');
       if(!peerDialog.open)peerDialog.showModal();
       startPeerQr();
     }

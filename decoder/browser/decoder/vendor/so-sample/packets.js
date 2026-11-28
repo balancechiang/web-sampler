@@ -8,9 +8,9 @@
  * 0x1d0f for the frame and carries across packets. The frame begins with an empty
  * 0x985b packet and ends with an empty 0x826f packet.
  */
-import { bytesEqual } from "./bytes.js?v=web-sampler-0.2.32";
-import { CRC_INITIAL_STATE, crcUpdate } from "./crc.js?v=web-sampler-0.2.32";
-import { FRAME_START_BYTE, wireBytes } from "./labels.js?v=web-sampler-0.2.32";
+import { bytesEqual } from "./bytes.js?v=web-sampler-0.2.33";
+import { CRC_INITIAL_STATE, crcUpdate } from "./crc.js?v=web-sampler-0.2.33";
+import { FRAME_START_BYTE, wireBytes } from "./labels.js?v=web-sampler-0.2.33";
 export const TAG = {
     START: 0x985b,
     END: 0x826f,

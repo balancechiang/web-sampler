@@ -41,38 +41,28 @@ body.transfer-open #samplerControls #panel {width:100%;visibility:hidden;pointer
 #transferPeer[open] #peerScanReply[hidden]{display:none}#transferPeer[open] #peerCancel{background:#333}#transferPeer[open] #peerStatus{min-height:2.4em}
 @media(max-height:420px){#transferPeer[open]{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,44vw);grid-template-rows:auto 1fr auto auto;text-align:left;gap:5px;}#transferPeer h2,#transferPeer p,#transferPeer button{grid-column:1}#peerQR{grid-column:2;grid-row:1/5;width:min(40vw,280px);height:min(40vw,280px);}}
 
-/* Camera scanner and direct-pairing codes use the full device viewport. */
-#transferControls #transferQR[open] {position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#000;color:#fff;isolation:isolate;}
-#transferQR::backdrop {background:#000;}
+/* Use a body-level overlay instead of fullscreen dialogs in embedded WebViews. */
+#transferQR.qr-camera-overlay {position:fixed;top:var(--scan-top,0);left:0;z-index:2147483000;box-sizing:border-box;width:var(--scan-width,100vw);height:var(--scan-height,100dvh);max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;overflow:hidden;background:#000;color:#fff;isolation:isolate;font:14px/1.35 Arial,sans-serif;}
+#transferQR.qr-camera-overlay[hidden] {display:none;}
 #transferQR video {position:absolute;inset:0;width:100%;height:100%;max-height:none;min-height:0;object-fit:cover;background:#000;transform:none;}
-#transferControls #transferQR video {position:absolute;inset:0;width:100%;height:100%;max-height:none;min-height:0;min-width:0;object-fit:cover;contain:strict;}
-#transferQR[open] {position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#000;color:#fff;isolation:isolate;}
-#transferQR header {position:absolute;top:0;left:0;right:0;z-index:1;padding:calc(12px + env(safe-area-inset-top)) 14px 18px;background:linear-gradient(#000c,transparent);pointer-events:none;}
+#transferQR header {position:absolute;top:0;left:0;right:0;z-index:1;box-sizing:border-box;padding:calc(12px + env(safe-area-inset-top)) 14px 24px;background:linear-gradient(#000e,transparent);pointer-events:none;}
 #transferQR header p {margin:0;}
 #transferQR #transferQRStatus {margin-top:5px;}
-#transferQR form {position:absolute;left:0;right:0;bottom:0;z-index:2;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:14px max(14px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:linear-gradient(transparent,#000e 22%);}
+#transferQR form {position:absolute;left:0;right:0;bottom:0;z-index:2;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:24px max(14px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:linear-gradient(transparent,#000e 22%);}
 #transferQR form button {min-height:44px;border:1px solid #aaa;border-radius:8px;background:#292929;color:#fff;font:inherit;touch-action:manipulation;}
 #transferQR #transferQRURLToggle,#transferQR #transferQRURLLabel {grid-column:1/-1;}
 #transferQR #transferQRURLLabel {font-size:12px;}
 #transferQR #transferQRURLLabel[hidden],#transferQR #transferQRImport[hidden] {display:none;}
 #transferQR input[type=url] {box-sizing:border-box;width:100%;min-height:42px;margin-top:4px;padding:8px;background:#111;color:#fff;border:1px solid #aaa;border-radius:6px;font:16px Arial,sans-serif;user-select:text;}
 #transferQR #transferQRCancel {background:#111c;}
-#transferControls #transferPeer[open] {position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:calc(8px + env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border:0;border-radius:0;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:4px;overflow:hidden;}
+#transferPeer[open] {position:fixed;inset:0;z-index:2147483001;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:calc(6px + env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));border:0;border-radius:0;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;justify-items:center;align-items:center;gap:2px;overflow:hidden;background:#111;color:#fff;}
 #transferPeer::backdrop {background:#111;}
-#transferPeer #peerQR {flex:0 1 auto;width:min(94vw,52dvh,480px);height:auto;aspect-ratio:1;max-height:52dvh;padding:6px;}
+#transferPeer #peerQR {grid-column:1/-1;grid-row:2;width:min(calc(var(--peer-vw,100vw) - 12px),calc(var(--peer-vh,100dvh) - 58px),640px);height:auto;aspect-ratio:1;max-height:none;padding:3px;align-self:center;}
 #transferPeer #peerQR img,#transferPeer #peerQR canvas {width:100%;height:100%;object-fit:contain;}
-#transferPeer #peerStatus {min-height:1.2em;}
-#transferPeer #peerScanReply,#transferPeer #peerCancel {flex:0 0 auto;min-height:36px;max-width:min(100%,480px);margin:0;}
-#transferPeer #peerCancel {margin-top:auto;}
+#transferPeer h2,#transferPeer #peerInstructions {display:none;}
+#transferPeer #peerStatus {grid-column:1/-1;grid-row:1;min-height:1.2em;margin:0;align-self:end;font-size:11px;}
+#transferPeer #peerScanReply,#transferPeer #peerCancel {grid-row:3;min-height:26px;max-width:640px;width:100%;margin:0;padding:2px;font-size:11px;}
+#transferPeer #peerScanReply {grid-column:1;}#transferPeer #peerCancel {grid-column:2;}
+#transferPeer:has(#peerScanReply[hidden]) #peerCancel {grid-column:1/-1;}
 #transferPeer[open] #peerScanReply[hidden] {display:none;}
-@media(max-width:700px) {
-  #transferQR form {gap:5px;padding-left:8px;padding-right:8px;}
-  #transferQR form button {min-height:34px;padding:3px;font-size:12px;}
-  #transferControls #transferPeer[open] {display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto minmax(0,1fr) auto;gap:3px;}
-  #transferPeer h2,#transferPeer #peerInstructions {display:none;}
-  #transferPeer #peerStatus {grid-column:1/-1;grid-row:1;font-size:.85em;}
-  #transferPeer #peerQR {grid-column:1/-1;grid-row:2;place-self:center;width:min(98vw,calc(100dvh - 64px));height:auto;max-height:min(98vw,calc(100dvh - 64px));padding:3px;}
-  #transferPeer #peerScanReply,#transferPeer #peerCancel {grid-row:3;min-height:30px;width:100%;font-size:.82em;padding:2px;}
-  #transferPeer #peerScanReply {grid-column:1;}
-  #transferPeer #peerCancel {grid-column:2;margin:0;}
-}
+@media(max-width:700px) {#transferQR form {gap:5px;padding-left:8px;padding-right:8px;}#transferQR form button {min-height:40px;padding:3px;font-size:12px;}}

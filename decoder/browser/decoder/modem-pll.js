@@ -1,4 +1,4 @@
-import { decodeFrame } from "./vendor/so-sample/packets.js?v=web-sampler-0.2.32";
+import { decodeFrame } from "./vendor/so-sample/packets.js?v=web-sampler-0.2.33";
 function biquad(cutoff, rate, q, highpass) {
     const k = Math.tan(Math.PI * cutoff / rate), norm = 1 / (1 + k / q + k * k), b0 = (highpass ? 1 : k * k) * norm;
     return { b0, b1: (highpass ? -2 : 2) * b0, b2: b0, a1: 2 * (k * k - 1) * norm, a2: (1 - k / q + k * k) * norm };

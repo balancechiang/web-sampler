@@ -25,8 +25,8 @@
  * Everything the device stores but the model does not describe (the first global
  * record, bytes 131 onwards of the second) comes from the empty-device template.
  */
-import { readChain, readSwing, readTempo, writeChain, writeSwing, writeTempo } from "./globals.js?v=web-sampler-0.2.32";
-import { PAGE, cloneState, SOUND_IDS } from "./state.js?v=web-sampler-0.2.32";
+import { readChain, readSwing, readTempo, writeChain, writeSwing, writeTempo } from "./globals.js?v=web-sampler-0.2.33";
+import { PAGE, cloneState, SOUND_IDS } from "./state.js?v=web-sampler-0.2.33";
 export const MEMORY_PAGES = 241;
 /** Shortest sample buffer the app keeps; imported buffers are padded to it. */
 export const MIN_CLIP_CODES = 128;
